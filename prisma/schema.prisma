@@ -16,6 +16,17 @@ model Patient {
   firstName String
   lastName  String?
   mobile    String
+}
+
+model HealthCare {
+  id      String  @id @default(uuid())
+  address String?
+  name    String
+  mobile  String
+}
+
+model User {
+  id String @id @default(uuid())
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
