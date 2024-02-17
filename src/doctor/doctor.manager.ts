@@ -1,13 +1,13 @@
 import { Prisma } from "@prisma/client";
-import { Patient, User } from "../utils/prisma";
+import { Doctor, User } from "../utils/prisma";
 
-export class PatientManager {
+export class DoctorManager {
     constructor() {}
 
-    public createPatient = async (
-        body: Prisma.UserUpsertArgs["create"] & Prisma.PatientUpsertArgs["create"],
+    public createDoctor = async (
+        body: Prisma.UserUpsertArgs["create"] & Prisma.DoctorUpsertArgs["create"],
     ) => {
-        const newPatient = await Patient.create({
+        const newDoctor = await Doctor.create({
             data: {
                 firstName: body.firstName,
                 mobile: body.mobile,
@@ -19,7 +19,7 @@ export class PatientManager {
             data: {
                 email: body.email,
                 createdAt: new Date(),
-                patientId: newPatient.id,
+                doctorId: newDoctor.id,
                 gender: body.gender,
             },
         });

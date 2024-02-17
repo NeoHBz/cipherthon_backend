@@ -38,8 +38,8 @@ model HealthCare {
 }
 
 model User {
-  id String @id @default(uuid())
-
+  id        String   @id @default(uuid())
+  gender    String?
   patientId String?
   doctorId  String?
   email     String   @unique
