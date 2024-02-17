@@ -5,3 +5,4 @@ export const prisma = new PrismaClient();
 
 // export individual models
 export const Patient = prisma.patient;
+export const User = prisma.user;

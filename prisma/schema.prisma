@@ -12,7 +12,7 @@ datasource db {
 
 model Patient {
   id        String  @id @default(uuid())
-  email     String  @unique
+  
   firstName String
   lastName  String?
   mobile    String
@@ -35,7 +35,7 @@ model User {
 
   patientId    String?
   healthCareId String?
-
+  email     String  @unique
   patient    Patient?    @relation(fields: [patientId], references: [id])
   healthCare HealthCare? @relation(fields: [healthCareId], references: [id])
 
