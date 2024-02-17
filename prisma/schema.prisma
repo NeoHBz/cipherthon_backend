@@ -11,12 +11,19 @@ datasource db {
 }
 
 model Patient {
-  id        String  @id @default(uuid())
-  
-  firstName String
-  lastName  String?
-  mobile    String
+  id          String       @id @default(uuid())
+  firstName   String
+  lastName    String?
+  mobile      String?
+  healthCares HealthCare[]
+  User        User[]
+}
 
+model Doctor {
+  id          String       @id @default(uuid())
+  firstName   String
+  lastName    String?
+  mobile      String?
   healthCares HealthCare[]
   User        User[]
 }
@@ -27,17 +34,17 @@ model HealthCare {
   address String?
 
   patients Patient[]
-  User     User[]
+  doctors  Doctor[]
 }
 
 model User {
   id String @id @default(uuid())
 
-  patientId    String?
-  healthCareId String?
-  email     String  @unique
-  patient    Patient?    @relation(fields: [patientId], references: [id])
-  healthCare HealthCare? @relation(fields: [healthCareId], references: [id])
+  patientId String?
+  doctorId  String?
+  email     String   @unique
+  patient   Patient? @relation(fields: [patientId], references: [id])
+  doctor    Doctor?  @relation(fields: [doctorId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
