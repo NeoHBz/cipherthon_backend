@@ -12,6 +12,8 @@ export class DoctorManager {
                 firstName: body.firstName,
                 mobile: body.mobile,
                 lastName: body.lastName,
+                degree: body.degree,
+                speciality: body.speciality,
             },
         });
 

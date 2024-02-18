@@ -18,6 +18,7 @@ export class DoctorController {
 
     private async createDoctor(req: Request, res: Response) {
         const body = req.body;
+        // gynae, ortho, ent, eye, skin, dental, heart, neuro, child, general
         const newUser = await this._patientManager.createDoctor(body);
         res.status(200).send(newUser);
     }

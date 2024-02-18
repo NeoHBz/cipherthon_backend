@@ -12,7 +12,7 @@ export class userController {
     }
 
     private initializeRoutes() {
-        this.router.get("/", catchAsync(this.userLogin.bind(this)));
+        this.router.post("/", catchAsync(this.userLogin.bind(this)));
         this.router.patch("/", catchAsync(this.updateUser.bind(this)));
     }
 

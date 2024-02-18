@@ -10,22 +10,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Appointment {
+  id              String   @id @default(uuid())
+  appointmentDate DateTime
+  status          String?  @default("pending")
+  patientId       String?
+  doctorId        String?
+
+  patient Patient? @relation(fields: [patientId], references: [id])
+  doctor  Doctor?  @relation(fields: [doctorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Patient {
-  id          String       @id @default(uuid())
+  id          String        @id @default(uuid())
   firstName   String
   lastName    String?
   mobile      String?
+
+  details        Json?
+
   healthCares HealthCare[]
   User        User[]
+  Appointment Appointment[]
 }
 
 model Doctor {
-  id          String       @id @default(uuid())
-  firstName   String
-  lastName    String?
-  mobile      String?
+  id         String  @id @default(uuid())
+  firstName  String
+  lastName   String?
+  mobile     String?
+  speciality String? @default("General")
+  degree     String? @default("MBBS")
+
   healthCares HealthCare[]
   User        User[]
+  Appointment Appointment[]
 }
 
 model HealthCare {
@@ -38,13 +60,14 @@ model HealthCare {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String  @id @default(uuid())
   gender    String?
   patientId String?
   doctorId  String?
-  email     String   @unique
-  patient   Patient? @relation(fields: [patientId], references: [id])
-  doctor    Doctor?  @relation(fields: [doctorId], references: [id])
+  email     String  @unique
+
+  patient Patient? @relation(fields: [patientId], references: [id])
+  doctor  Doctor?  @relation(fields: [doctorId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
